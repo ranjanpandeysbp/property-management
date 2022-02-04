@@ -1,0 +1,9 @@
+http://localhost:8080/v2/api-docs
+http://localhost:8080/swagger-ui/index.html
+https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html
+http://localhost:8080/actuator
+
+https://thorben-janssen.com/entity-mappings-introduction-jpa-fetchtypes/#:~:text=you%20need%20it-,The%20FetchType.,need%20for%20your%20uses%20case.
+
+for *->One relationship, default is FetchType.EAGER -> While getting parent data also get child entity data
+for *->Many relationship, default is FetchType.LAZY -> While getting parent data do not get child entity data
