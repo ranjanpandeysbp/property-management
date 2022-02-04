@@ -7,21 +7,22 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "PROPERTY_TABLE")
+@Table(name = "ADDRESS_TABLE")
 @Getter
 @Setter
 @NoArgsConstructor
-public class PropertyEntity {
+public class AddressEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "PROPERTY_TITLE", nullable = false)
-    private String title;
-    private String description;
-    private Double price;
-    private String address;
-    @ManyToOne//(fetch = FetchType.LAZY)//it will not fetch the user data while fetching property
+    private String houseNo;
+    private String street;
+    private String city;
+    private String postalCode;
+    private String country;
+
+    @OneToOne
     @JoinColumn(name = "USER_ID", nullable = false)
     private UserEntity userEntity;
 }
