@@ -7,20 +7,15 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ADDRESS_TABLE")
+@Table(name = "CATEGORY_TABLE")
 @Getter
 @Setter
 @NoArgsConstructor
-public class AddressEntity {
+public class CategoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String houseNo;
-    private String street;
-    private String city;
-    private String postalCode;
-    private String state;
-    private String landmark;
-    private String country;
+    @Column(name = "CATEGORY_TITLE", nullable = false)
+    private String title;
 }

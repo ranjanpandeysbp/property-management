@@ -10,55 +10,19 @@ public class PropertyDTO {
     private Long id;
     private String title;
     private String description;
+    private String construction;
     private Double price;
-    private String address;
+    private String image1;
+    private String image2;
+    private String image3;
+    private String video;
+    private Double area;
+    private Integer noOfRooms;
+
     private Long userId;
 
-    /*public String getTitle() {
-        return title;
-    }
+    private Long categoryId;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
-
-    public String getOwnerEmail() {
-        return ownerEmail;
-    }
-
-    public void setOwnerEmail(String ownerEmail) {
-        this.ownerEmail = ownerEmail;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }*/
+    //Address Related
+    private AddressDTO addressDTO;
 }

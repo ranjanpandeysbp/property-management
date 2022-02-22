@@ -2,13 +2,18 @@ package com.mycompany.propertymanagement.service.impl;
 
 import com.mycompany.propertymanagement.converter.PropertyConverter;
 import com.mycompany.propertymanagement.dto.PropertyDTO;
+import com.mycompany.propertymanagement.entity.AddressEntity;
+import com.mycompany.propertymanagement.entity.CategoryEntity;
 import com.mycompany.propertymanagement.entity.PropertyEntity;
 import com.mycompany.propertymanagement.entity.UserEntity;
 import com.mycompany.propertymanagement.exception.BusinessException;
 import com.mycompany.propertymanagement.exception.ErrorModel;
+import com.mycompany.propertymanagement.repository.AddressRepository;
+import com.mycompany.propertymanagement.repository.CategoryRepository;
 import com.mycompany.propertymanagement.repository.PropertyRepository;
 import com.mycompany.propertymanagement.repository.UserRepository;
 import com.mycompany.propertymanagement.service.PropertyService;;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,17 +37,33 @@ public class PropertyServiceImpl implements PropertyService {
     private PropertyConverter propertyConverter;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AddressRepository addressRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public PropertyDTO saveProperty(PropertyDTO propertyDTO) {
 
         Optional<UserEntity> optUe = userRepository.findById(propertyDTO.getUserId());
         if(optUe.isPresent()) {
-            PropertyEntity pe = propertyConverter.convertDTOtoEntity(propertyDTO);
-            pe.setUserEntity(optUe.get());
-            pe = propertyRepository.save(pe);
+            PropertyEntity propertyEntity = new PropertyEntity();
+            BeanUtils.copyProperties(propertyDTO, propertyEntity);
 
-            propertyDTO = propertyConverter.convertEntityToDTO(pe);
+            AddressEntity ae = new AddressEntity();
+            BeanUtils.copyProperties(propertyDTO.getAddressDTO(), ae);
+
+            ae = addressRepository.save(ae);
+            propertyEntity.setAddressEntity(ae);
+
+            CategoryEntity ce = categoryRepository.findById(propertyDTO.getCategoryId()).get();
+            propertyEntity.setCategoryEntity(ce);
+
+            UserEntity ue = userRepository.findById(propertyDTO.getUserId()).get();
+            propertyEntity.setUserEntity(ue);
+
+            propertyRepository.save(propertyEntity);
+            propertyDTO = propertyConverter.convertEntityToDTO(propertyEntity);
         }else{
             List<ErrorModel> errorModelList = new ArrayList<>();
             ErrorModel errorModel = new ErrorModel();
@@ -91,7 +112,6 @@ public class PropertyServiceImpl implements PropertyService {
 
             PropertyEntity pe = optEn.get();//data from database
             pe.setTitle(propertyDTO.getTitle());
-            pe.setAddress(propertyDTO.getAddress());
             pe.setPrice(propertyDTO.getPrice());
             pe.setDescription(propertyDTO.getDescription());
             dto = propertyConverter.convertEntityToDTO(pe);

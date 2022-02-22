@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO register(UserDTO userDTO) {
 
-        Optional<UserEntity> optUe = userRepository.findByOwnerEmail(userDTO.getOwnerEmail());
+        Optional<UserEntity> optUe = userRepository.findByEmail(userDTO.getEmail());
         if(optUe.isPresent()){
             List<ErrorModel> errorModelList = new ArrayList<>();
             ErrorModel errorModel = new ErrorModel();
@@ -43,16 +43,6 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = userConverter.convertDTOtoEntity(userDTO);
         userEntity = userRepository.save(userEntity);
 
-        AddressEntity addressEntity = new AddressEntity();
-        addressEntity.setHouseNo(userDTO.getHouseNo());
-        addressEntity.setCity(userDTO.getCity());
-        addressEntity.setPostalCode(userDTO.getPostalCode());
-        addressEntity.setStreet(userDTO.getStreet());
-        addressEntity.setCountry(userDTO.getCountry());
-        addressEntity.setUserEntity(userEntity);
-
-        addressRepository.save(addressEntity);
-
         userDTO = userConverter.convertEntityToDTO(userEntity);
 
         return userDTO;
@@ -61,7 +51,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO login(String email, String password) {
         UserDTO userDTO = null;
-        Optional<UserEntity> optionalUserEntity = userRepository.findByOwnerEmailAndPassword(email, password);
+        Optional<UserEntity> optionalUserEntity = userRepository.findByEmailAndPassword(email, password);
 
         if(optionalUserEntity.isPresent()){
             userDTO = userConverter.convertEntityToDTO(optionalUserEntity.get());

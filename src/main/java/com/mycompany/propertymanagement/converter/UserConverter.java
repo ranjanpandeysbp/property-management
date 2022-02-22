@@ -9,8 +9,9 @@ public class UserConverter {
 
     public UserEntity convertDTOtoEntity(UserDTO userDTO){
         UserEntity userEntity = new UserEntity();
-        userEntity.setOwnerEmail(userDTO.getOwnerEmail());
-        userEntity.setOwnerName(userDTO.getOwnerName());
+        userEntity.setEmail(userDTO.getEmail());
+        userEntity.setFirstName(userDTO.getFirstName());
+        userEntity.setLastName(userDTO.getLastName());
         userEntity.setPassword(userDTO.getPassword());
         userEntity.setPhone(userDTO.getPhone());
         return userEntity;
@@ -19,8 +20,9 @@ public class UserConverter {
     public UserDTO convertEntityToDTO(UserEntity userEntity){
         UserDTO userDTO = new UserDTO();
         userDTO.setId(userEntity.getId());
-        userDTO.setOwnerEmail(userEntity.getOwnerEmail());
-        userDTO.setOwnerName(userEntity.getOwnerName());
+        userDTO.setEmail(userEntity.getEmail());
+        userDTO.setFirstName(userEntity.getFirstName());
+        userDTO.setLastName(userEntity.getLastName());
         userDTO.setPhone(userEntity.getPhone());
         return userDTO;
     }

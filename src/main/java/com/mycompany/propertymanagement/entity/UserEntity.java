@@ -15,9 +15,13 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String ownerName;
+    private String firstName;
+    private String lastName;
     @Column(name = "EMAIL", nullable = false)
-    private String ownerEmail;
+    private String email;
     private String phone;
     private String password;
+    @OneToOne
+    @JoinColumn(name = "ADDRESS_ID")
+    private AddressEntity addressEntity;
 }
