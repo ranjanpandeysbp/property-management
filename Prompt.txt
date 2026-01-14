@@ -1,0 +1,7 @@
+As a senior engineer read the files in audit-data-mgmt, understand the complete project and generate the tutorial form explanation of the whole project so that any new team member can understand the project easily both technically and functionally.  also add another markdown document that explains the code snipets also for all functionalities, Inject the output inside "functional_docs" folder in markdown format and mermaid diagram
+
+-----
+
+* Act as a senior architect, look into all the files inside sre and understand all the code and their relationships and how their connected functionally and techincally and create system digrams, interaction diagrams, sequence diagrams, class diagrams, flow diagrams. Also generate documentation chapter wise with code examples explaining what exactly this project is doing. Use mermaid diagrams and markdown files to generate the final outcomeand store the output files inside a newly created folder named "Output Data" at the root.
+
+* As a senior engineer read the files in src folder, understand the complete project and generate the tutorial form explanation of the whole project so that any new team member can understand the project easily both technically and functionally. Inject the output inside "Functional_data" folder in markdown format.
